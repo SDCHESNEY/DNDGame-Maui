@@ -15,10 +15,19 @@ Thumbs.db
 .vs/
 *.suo
 *.user
+*.csproj.user
+*.vbproj.user
+*.vcxproj.user
+*.vcxitems.user
+*.fsproj.user
 *.userosscache
 *.sln.docstates
 *.VC.db
 *.VC.VC.opendb
+*.psess
+*.vsp
+*.vspx
+*.sap
 
 # Visual Studio Code (keep common workspace files)
 .vscode/*
@@ -27,6 +36,9 @@ Thumbs.db
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/*.code-snippets
+*.code-workspace
+.history/
+.vscode-test/
 
 # JetBrains Rider / ReSharper
 .idea/
@@ -47,6 +59,9 @@ x64/
 x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
+AppPackages/
+BundleArtifacts/
+BundleArtifacts/**
 
 # Test output / Coverage
 TestResults/
@@ -61,6 +76,7 @@ coverage/
 # Logs
 *.log
 logs/
+[Ll]og/
 
 # NuGet
 *.nupkg
@@ -85,16 +101,21 @@ BenchmarkDotNet.Artifacts/
 *.dex
 *.class
 *.keystore
+*.profiler.json
 # iOS/macOS app bundles and symbols
 *.app
 *.ipa
 *.dSYM
 *.xcarchive
+*.xcuserdatad
+xcshareddata/
 # Xcode
 *.xcworkspace
 *.xcuserstate
 xcuserdata/
 DerivedData/
+Pods/
+Podfile.lock
 
 # Certificates / provisioning (never commit secrets)
 *.pfx
@@ -120,6 +141,9 @@ yarn.lock
 !.env.example
 secrets.json
 *.local.json
+local.settings.json
+appsettings.*.json
+appsettings.*.Development.json
 
 # macOS folder metadata
 .Spotlight-V100
