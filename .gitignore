@@ -1,0 +1,126 @@
+# -------------------------------------------------------------
+# .gitignore for .NET, MAUI, and Blazor development
+# -------------------------------------------------------------
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+*.temp
+~$*
+
+# Visual Studio / IDE
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio Code (keep common workspace files)
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/*.code-snippets
+
+# JetBrains Rider / ReSharper
+.idea/
+*.sln.iml
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Build output
+bin/
+obj/
+[Bb]uild/
+[Bb]uilds/
+artifacts/
+Debug/
+Release/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+# Test output / Coverage
+TestResults/
+.vstest/
+*.trx
+*.coverage
+*.coveragexml
+coverage/
+.nCrunch_temp/
+.nunit/
+
+# Logs
+*.log
+logs/
+
+# NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+*.psmdcp
+.nuget/packages/
+packages/
+project.lock.json
+
+# BenchmarkDotNet
+BenchmarkDotNet.Artifacts/
+
+# EF Core
+# (Migrations should be committed; no ignore here.)
+
+# MAUI / Mobile artifacts
+# Android
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+*.keystore
+# iOS/macOS app bundles and symbols
+*.app
+*.ipa
+*.dSYM
+*.xcarchive
+# Xcode
+*.xcworkspace
+*.xcuserstate
+xcuserdata/
+DerivedData/
+
+# Certificates / provisioning (never commit secrets)
+*.pfx
+*.p12
+*.cer
+*.mobileprovision
+*.provisionprofile
+*.der
+
+# Node / Web (for Blazor WASM tooling)
+node_modules/
+dist/
+build/
+wwwroot/node_modules/
+wwwroot/dist/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Environment / Local config
+.env
+.env.*
+!.env.example
+secrets.json
+*.local.json
+
+# macOS folder metadata
+.Spotlight-V100
+.Trashes
