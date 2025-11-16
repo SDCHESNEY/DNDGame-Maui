@@ -56,7 +56,7 @@ Acceptance Criteria
 
 ---
 
-## Phase 2 — OpenAI Integration (Default) & Secure Key Handling
+## Phase 2 — OpenAI Integration (Default) & Secure Key Handling ✅ **COMPLETE (Nov 2025)**
 
 Objectives
 - Make OpenAI the default LLM provider with encrypted API key storage.
@@ -94,6 +94,11 @@ Acceptance Criteria
 - Valid API key entry passes a test call within 10 seconds and displays a non-empty response; invalid key shows a clear error without exposing the key.
 - API key persists across app restarts; delete removes it and test call is blocked until re-entered.
 - Automated log scan in test confirms no plaintext API key; manual export confirms key absent.
+
+Status Notes (Nov 2025)
+- `OpenAiLlmService` now drives all completions with streamed updates, Polly retry policies, and `BasicLlmSafetyFilter` hooks before/after dispatch.
+- Secure key entry flows are wired through `SettingsPage`/`SettingsViewModel`; secrets persist in `SecureStorage` behind DI-friendly abstractions used by new unit/integration tests.
+- `Test Connection` exercises the live service using a mockable HTTP pipeline, and MAUI UITests verify both success and failure messaging without exposing secrets.
 
 ---
 

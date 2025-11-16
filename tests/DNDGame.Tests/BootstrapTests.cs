@@ -1,4 +1,7 @@
 #nullable enable
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using DNDGame.Data;
 using DNDGame.Services.Crypto;
 using DNDGame.Services.Interfaces;
@@ -6,6 +9,7 @@ using DNDGame.Services.Llm;
 using DNDGame.Services.P2P;
 using DNDGame.Services.Settings;
 using DNDGame.Services.Sync;
+using DNDGame.Tests.Fakes;
 // Global usings moved to GlobalUsings.cs to satisfy IDE0005
 
 namespace DNDGame.Tests;
@@ -17,8 +21,11 @@ public class BootstrapTests
     {
         var sc = new ServiceCollection();
         sc.AddDbContext<DndGameContext>(o => o.UseSqlite("Data Source=:memory:"));
+        sc.AddSingleton<ISecureStorageProvider, InMemorySecureStorageProvider>();
         sc.AddSingleton<ISettingsService, SettingsService>();
-        sc.AddSingleton<ILlmService, StubLlmService>();
+        sc.AddSingleton<ILlmSafetyFilter, BasicLlmSafetyFilter>();
+        sc.AddHttpClient<OpenAiLlmService>().ConfigurePrimaryHttpMessageHandler(_ => new DummyHttpHandler());
+        sc.AddSingleton<ILlmService>(sp => sp.GetRequiredService<OpenAiLlmService>());
         sc.AddSingleton<ICryptoService, CryptoService>();
         sc.AddSingleton<IP2PTransport, DummyP2PTransport>();
         sc.AddSingleton<ISyncEngine, SyncEngine>();
@@ -47,5 +54,14 @@ public class BootstrapTests
 
         var count = await ctx.Characters.CountAsync();
         count.Should().Be(1);
+    }
+
+    private sealed class DummyHttpHandler : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            => Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"choices\":[{\"message\":{\"content\":\"pong\"}}]}", Encoding.UTF8, "application/json")
+            });
     }
 }

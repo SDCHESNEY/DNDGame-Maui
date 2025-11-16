@@ -11,6 +11,7 @@ A fully self‑contained .NET MAUI application delivering a privacy‑first, LLM
 - **Peer-to-Peer Multiplayer**: Real-time collaboration via encrypted LAN/Nearby connections
 - **Offline-First**: Full solo play capability; sessions sync when peers reconnect
 - **Flexible LLM Integration**: OpenAI (default), localhost (Ollama/LM Studio), or on-device inference
+- **Secure OpenAI Defaults**: Streaming completions, Polly-backed retries, `BasicLlmSafetyFilter`, and biometric-gated `SecureStorage` for API keys
 - **Privacy by Default**: End-to-end encryption, local storage, no telemetry
 - **Cross-Platform**: iOS, Android, macOS, and Windows with consistent native UI
 
@@ -350,7 +351,7 @@ A phased approach ensures each milestone is fully tested and integrated before m
 
 ---
 
-### Phase 2 — OpenAI Integration (Default) & Secure Key Handling 🔄 **NEXT**
+### Phase 2 — OpenAI Integration (Default) & Secure Key Handling ✅ **COMPLETE**
 **Objectives**
 - Make OpenAI the default LLM provider
 - Secure API key entry and storage via `SecureStorage`
@@ -374,6 +375,11 @@ A phased approach ensures each milestone is fully tested and integrated before m
 - Invalid key shows clear error without exposing key
 - API key persists across restarts and is absent from logs/exports
 - Settings show provider=`OpenAI` by default
+
+**Status Update (Nov 2025)**
+- `OpenAiLlmService` now handles streamed completions with Polly retry/backoff and the new `BasicLlmSafetyFilter` pre/post content guardrails.
+- Settings UI ships provider/model pickers, secure API key entry bound to `SecureStorage`, biometric gating, and a `Test Connection` flow validated by mocked + live integration tests.
+- Unit/UITests cover secure key lifecycles, HTTP request composition, log redaction, and user-facing success/error messaging without exposing secrets.
 
 ---
 
@@ -470,8 +476,8 @@ A phased approach ensures each milestone is fully tested and integrated before m
 ---
 
 ## Current Status
-**Active Phase**: Phase 1 Complete ✅  
-**Next Milestone**: Phase 2 — OpenAI Integration
+**Active Phase**: Phase 2 Complete ✅  
+**Next Milestone**: Phase 3 — P2P Transport
 
 All phases include comprehensive unit, integration, and security testing with defined acceptance criteria. Quality gates enforce code style, nullable reference types, async patterns, and zero warnings in core projects.
 
@@ -757,4 +763,4 @@ This application:
 ---
 
 **Last Updated**: November 2025  
-**Status**: Phase 1 Complete ✅ | Phase 2 In Progress 🔄
+**Status**: Phase 2 Complete ✅ | Phase 3 In Progress 🔄
