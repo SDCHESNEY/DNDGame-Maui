@@ -21,13 +21,14 @@ public class BootstrapTests
     {
         var sc = new ServiceCollection();
         sc.AddDbContext<DndGameContext>(o => o.UseSqlite("Data Source=:memory:"));
+        sc.AddLogging();
         sc.AddSingleton<ISecureStorageProvider, InMemorySecureStorageProvider>();
         sc.AddSingleton<ISettingsService, SettingsService>();
         sc.AddSingleton<ILlmSafetyFilter, BasicLlmSafetyFilter>();
         sc.AddHttpClient<OpenAiLlmService>().ConfigurePrimaryHttpMessageHandler(_ => new DummyHttpHandler());
         sc.AddSingleton<ILlmService>(sp => sp.GetRequiredService<OpenAiLlmService>());
         sc.AddSingleton<ICryptoService, CryptoService>();
-        sc.AddSingleton<IP2PTransport, DummyP2PTransport>();
+        sc.AddSingleton<IP2PTransport, LanP2PTransport>();
         sc.AddSingleton<ISyncEngine, SyncEngine>();
         var sp = sc.BuildServiceProvider();
 

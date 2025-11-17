@@ -102,7 +102,7 @@ Status Notes (Nov 2025)
 
 ---
 
-## Phase 3 — P2P Transport (LAN/Nearby) with E2E Encryption
+## Phase 3 — P2P Transport (LAN/Nearby) with E2E Encryption ✅ **COMPLETE (Nov 2025)**
 
 Objectives
 - Build serverless peer discovery and encrypted P2P channels for chat/actions.
@@ -145,6 +145,13 @@ Acceptance Criteria
 - Encrypted chat exchanges at least 20 back-and-forth messages with delivery acknowledgements; no plaintext captured in transport logs.
 - Tampered/replayed frames are rejected and logged as security events without app crash.
 - Device identity keys persist across restarts; previously trusted peers re-connect without re-pair unless keys changed.
+
+Status Notes (Nov 2025)
+- `ICryptoService` now uses NSec (Ed25519/X25519) with persistent device identities, HKDF-derived session keys, and short peer IDs surfaced in the lobby.
+- `LanP2PTransport` implements secure loopback/LAN channels, handshake + replay protection, delivery ACKs, and raises discovery/connect/disconnect events consumed by the new Session Lobby UI.
+- `MainPageViewModel`/`MainPage.xaml` were overhauled to display peers, connection status, and an encrypted chat pane wired to the transport.
+- `PhaseThreeTests` exercise identity persistence, symmetric shared-secret derivation, and encrypted message exchange; `dotnet test` now runs clean with the new transport.
+- Nearby/BLE transport remains planned for a later Phase 3B follow-up once LAN parity stabilizes.
 
 ---
 

@@ -10,6 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageReference Include="NSec.Cryptography" Version="22.4.0" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.0" />
   </ItemGroup>
 </Project>

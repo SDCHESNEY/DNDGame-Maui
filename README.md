@@ -383,7 +383,7 @@ A phased approach ensures each milestone is fully tested and integrated before m
 
 ---
 
-### Phase 3 — P2P Transport (LAN/Nearby) with E2E Encryption
+### Phase 3 — P2P Transport (LAN/Nearby) with E2E Encryption ✅ **COMPLETE**
 **Objectives**
 - Serverless peer discovery and encrypted P2P channels
 - Device identity and mutual authentication
@@ -409,6 +409,13 @@ A phased approach ensures each milestone is fully tested and integrated before m
 - 20+ back-and-forth encrypted messages with delivery acks
 - Tampered/replayed frames rejected and logged
 - Device identity persists across restarts
+
+**Status Update (Nov 2025)**
+- `ICryptoService` now persists Ed25519/X25519 identities via NSec, surfaces short peer IDs in the UI, and derives session keys with HKDF.
+- `LanP2PTransport` + `LanPeerConnection` implement the Noise-inspired handshake, AES-GCM secure channel, delivery ACKs, and replay protection for LAN/loopback peers.
+- Session Lobby UI shows discovered peers, connection state, and encrypted chat backed by the transport; commands enable start/stop/connect/send flows end-to-end.
+- New `PhaseThreeTests` cover identity persistence, symmetric shared secrets, and encrypted message exchange, keeping `dotnet test` green.
+- Nearby/BLE discovery remains scheduled as a follow-on once LAN rollout stabilizes.
 
 ---
 
@@ -476,8 +483,8 @@ A phased approach ensures each milestone is fully tested and integrated before m
 ---
 
 ## Current Status
-**Active Phase**: Phase 2 Complete ✅  
-**Next Milestone**: Phase 3 — P2P Transport
+**Active Phase**: Phase 3 Complete ✅  
+**Next Milestone**: Phase 4 — Sync Engine & Dice System
 
 All phases include comprehensive unit, integration, and security testing with defined acceptance criteria. Quality gates enforce code style, nullable reference types, async patterns, and zero warnings in core projects.
 
@@ -763,4 +770,4 @@ This application:
 ---
 
 **Last Updated**: November 2025  
-**Status**: Phase 2 Complete ✅ | Phase 3 In Progress 🔄
+**Status**: Phase 3 Complete ✅ | Phase 4 In Planning 🔄
