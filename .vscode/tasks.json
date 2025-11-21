@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-ios-simulator",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/DNDGame.App/DNDGame.App.csproj",
+                "-f",
+                "net9.0-ios",
+                "-c",
+                "Debug",
+                "-p:RuntimeIdentifier=iossimulator-arm64"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "run-ios-simulator",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "msbuild",
+                "${workspaceFolder}/src/DNDGame.App/DNDGame.App.csproj",
+                "/t:Run",
+                "/p:TargetFramework=net9.0-ios",
+                "/p:Configuration=Debug",
+                "/p:RuntimeIdentifier=iossimulator-arm64",
+                "/p:_DeviceName=:v2:udid=65D52CB5-C9CE-456B-95B5-4999118DAF69"
+            ],
+            "problemMatcher": "$msCompile",
+            "dependsOn": "build-ios-simulator"
+        }
+    ]
+}
