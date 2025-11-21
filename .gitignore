@@ -148,3 +148,5 @@ appsettings.*.Development.json
 # macOS folder metadata
 .Spotlight-V100
 .Trashes
+
+.fake

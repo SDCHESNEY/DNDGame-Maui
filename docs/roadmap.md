@@ -155,7 +155,7 @@ Status Notes (Nov 2025)
 
 ---
 
-## Phase 4 — Sync Engine (CRDT + Event Log) & Dice System
+## Phase 4 — Sync Engine (CRDT + Event Log) & Dice System ✅ **COMPLETE (Nov 2025)**
 
 Objectives
 - Provide offline-first, eventually-consistent state sync for sessions.
@@ -193,6 +193,11 @@ Acceptance Criteria
 - After partition and reconnection, all peers reach identical chat and session state within 15 seconds of link restoration without user action.
 - Event log inspector (dev view) shows a consistent topological order and no orphaned nodes.
 - Dice rolls display identical totals and components on all peers; signature verification passes; invalidly signed rolls show an error and are excluded.
+
+Status Notes (Nov 2025)
+- `SyncEngine` now persists a content-addressed event log with Lamport/vector clocks, parent edges, and deterministic ordering for chat, flags, presence, and dice CRDT views.
+- A new `DiceService` parses `XdY+Z` formulas (adv/dis), rolls via `RandomNumberGenerator`, signs evidence with device identities, and stores results through the sync engine.
+- Session materialization exposes chat ordering hints, LWW presence/flag state, and verified dice history used by tests and upcoming UI work.
 
 ---
 
